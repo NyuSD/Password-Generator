@@ -15,22 +15,50 @@ function generatePassword() {
     return password;
 }
 
+/**
+ * Function to take string of lowercase letters and change some to uppercase at random
+ */
+function randomUpperCase(password) {
+    let newPassword = '';
+    for (let i = 0; i < password.length; i++) {
+        if (Math.random() < 0.5) {
+            newPassword += password[i].toUpperCase();
+        } else {
+            newPassword += password[i];
+        }
+    }
+    return newPassword;
+}
 
 /**
  * Parse the command line arguments
  */
 
 function handleArgs(args) {
+    let upperCase = false;
     for (let i = 0; i < args.length; i++) {
-        if (args[i] === '--Length') {
-            passwordLength = parseInt(args[i + 1]);
-            i++;
-        } else {
-            printHelp();
-            process.exit(1);
-        }
+       switch (args[i]) {
+           case '--length':
+               passwordLength = parseInt(args[i + 1]);
+               i++;
+               break;
+           case '--help':
+               printHelp();
+               break;
+            case '--upper':
+                upperCase = true;
+                break;
+           default:
+               console.error(`Unknown argument: ${args[i]}`);
+               printHelp();
+               process.exit(1);
+            }
+       }
+    let password = generatePassword();
+    if (upperCase) {
+        password = randomUpperCase(password);
     }
-    console.log(generatePassword());
+    console.log(password);
 }
     
 
