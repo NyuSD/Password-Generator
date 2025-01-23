@@ -17,6 +17,25 @@ function generatePassword() {
 
 
 /**
+ * Parse the command line arguments
+ */
+
+function handleArgs(args) {
+    for (let i = 0; i < args.length; i++) {
+        if (args[i] === '--Length') {
+            passwordLength = parseInt(args[i + 1]);
+            i++;
+        } else {
+            printHelp();
+            process.exit(1);
+        }
+    }
+    console.log(generatePassword());
+}
+    
+
+
+/**
  * Help message
  */
 
@@ -31,4 +50,5 @@ Example:
     QAP1 --Length 12
   `);
 }
-console.log (generatePassword());
+
+handleArgs(args);
