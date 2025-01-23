@@ -15,7 +15,20 @@ function generatePassword() {
     return password;
 }
 
-
+/**
+ * Function to take string of lowercase letters and change some to uppercase at random
+ */
+function randomUpperCase(password) {
+    let newPassword = '';
+    for (let i = 0; i < password.length; i++) {
+        if (Math.random() < 0.5) {
+            newPassword += password[i].toUpperCase();
+        } else {
+            newPassword += password[i];
+        }
+    }
+    return newPassword;
+}
 
 /**
  * Parse the command line arguments
@@ -35,6 +48,9 @@ function handleArgs(args) {
                     process.exit(1);
                 }
                 break;
+            case '--upper':
+                upperCase = true;
+                break;           
            case '--help':
                printHelp();
                break;
@@ -45,6 +61,9 @@ function handleArgs(args) {
             }
        }
     let password = generatePassword();
+    if (upperCase) {
+        password = randomUpperCase(password);
+    }
     console.log(password);
 }
     
@@ -61,6 +80,7 @@ Usage: QAP1 [options]
 Options:
   --length [number]        Set the number of characters for the password (default: 8)
   --help                   Show this help message
+  --upper                  Include uppercase letters in the password
 
 Example:
     QAP1 --Length 12
