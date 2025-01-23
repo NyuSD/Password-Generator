@@ -73,6 +73,8 @@ Usage: QAP1 [options]
 
 Options:
   --Length [number]        Set the number of characters for the password (default: 8)
+  --Upper                  Include uppercase letters in the password
+  --help                   Show this help message
 
 Example:
     QAP1 --Length 12
