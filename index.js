@@ -39,9 +39,15 @@ function handleArgs(args) {
     for (let i = 0; i < args.length; i++) {
        switch (args[i]) {
            case '--length':
-               passwordLength = parseInt(args[i + 1]);
-               i++;
-               break;
+                if (i + 1 < args.length && !isNaN(args[i + 1])) {
+                    passwordLength = parseInt(args[i + 1]);
+                    i++; 
+                } else {
+                    console.error(`Error: Invalid value for --length. Please provide a number.`);
+                    printHelp();
+                    process.exit(1);
+                }
+                break;
            case '--help':
                printHelp();
                break;
@@ -72,8 +78,8 @@ function printHelp() {
 Usage: QAP1 [options]
 
 Options:
-  --Length [number]        Set the number of characters for the password (default: 8)
-  --Upper                  Include uppercase letters in the password
+  --length [number]        Set the number of characters for the password (default: 8)
+  --upper                  Include uppercase letters in the password
   --help                   Show this help message
 
 Example:
