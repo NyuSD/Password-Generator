@@ -1,0 +1,11 @@
+{
+  "name": "qap1",
+  "version": "1.0.0",
+  "description": "Allows the user to generate passwords",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jacob Crummey",
+  "license": "MIT"
+}
